@@ -20,7 +20,7 @@ class News(models.Model):
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
-        ordering = ['id']
+        ordering = ['time_create']
 
 class Category(models.Model):
     name = models.CharField(max_length=250, unique=True, db_index=True, verbose_name='Категория')
