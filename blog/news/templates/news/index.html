@@ -1,0 +1,27 @@
+{% extends 'news/base.html' %}
+{% load cache %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'news/css/video-home.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="bgvideo">
+      {% cache 300 video-home %}
+      <video class="bgvideo__media" src="{% static 'news/files/video-home.mp4' %}" type="video/mp4" autoplay muted loop></video>
+      {% endcache %}
+      <div class="effects"></div>
+      <div class="container text-center">
+        <div class="row one">
+          <div class="col">
+            <div class="video-text">
+              {% if request.user.is_authenticated %}
+              <a href="{% url 'home' %}"><h1>Welcome, {{user.username|truncatewords:11}}</h1></a>
+              {% else %}
+               <a href="{% url 'home' %}"><h1>Welcome!</h1></a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

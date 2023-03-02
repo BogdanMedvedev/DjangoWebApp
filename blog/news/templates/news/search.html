@@ -1,0 +1,39 @@
+<!--Подгружаем базовые элементы страницы-->
+{% extends 'news/base.html' %}
+
+<!--Подключаем папку static, чтобы импортировать стили css-->
+{% load static %}
+
+{% block style %}
+<!--Подгружаем стили для страницы с новостями-->
+<link rel="stylesheet" href="{% static 'news/css/news.css' %}">
+{% endblock %}
+{% block content %}
+<!--Если задан пустой запрос-->
+{% if text == 'text=&' %}
+<h1 style="color:#ffffff;">Задан пустой поисковый запрос</h1>
+
+
+<!--Если найдены совпадения-->
+{% elif allnews %}
+<div class="list-news">
+<h1 style="color:#ffffff;">Результаты поиска: {{result}}</h1>
+{% for i in allnews %}
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{ i.title }}</h5>
+      <small class="text-muted">{{ i.time_create }}</small>
+    </div>
+    <p class="mb-1">{{ i.description }}</p>
+    <small class="text-muted">Категория: {{ i.category }}</small>
+  </a>
+  </div>
+{% endfor %}
+</div>
+
+<!--Если совпадения не найдены-->
+{% else %}
+<h1 style="color:#ffffff;">По вашему запросу ничего не найдено</h1>
+{% endif %}
+{% endblock %}

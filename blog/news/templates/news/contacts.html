@@ -1,0 +1,67 @@
+{% extends 'news/base.html' %}
+
+{% load static %}
+
+{% block style %}
+<!--Подгружаем стили для страницы с новостями-->
+<link rel="stylesheet" href="{% static 'news/css/contacts.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col-lg-8 col-md-12">
+                    <table class="table table-dark table-hover">
+                        <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2"><h5>Разработчик</h5></td>
+                                <td><h5>Медведев Богдан Александрович</h5></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><h5>Почта</h5></td>
+                                <td><h5>bogdances@yandex.ru</h5></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><h5>Телефон</h5></td>
+                                <td><h5>+ 7 (953) 554-22-07</h5></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </div>
+<div class="container text-center">
+  <div class="row align-items-start">
+          <div class="col-2">
+    </div>
+            <div class="col-2">
+      <a target="_blank" href=https://github.com/BogdanMedvedev?tab=repositories><img class="contact"
+                                src="{% static 'news/images/GitHub.png'%}" alt="GitHub"></a>
+    </div>
+    <div class="col-2">
+      <a target="_blank" href="https://hh.ru/resume/bf18195bff0b852dfe0039ed1f67354249465a"><img class="contact"
+                                src="{% static 'news/images/hh.png'%}" alt="hh.ru"></a>
+    </div>
+    <div class="col-2">
+      <a target="_blank" href="https://www.linkedin.com/in/bmedvedev/"><img class="contact"
+                                src="{% static 'news/images/linkedin.png'%}" alt="Linkedin"></a>
+    </div>
+    <div class="col-2">
+      <a target="_blank" href="https://t.me/bogdances"><img class="contact"
+                                src="{% static 'news/images/telegram.png'%}" alt="Telegram"></a>
+    </div>
+
+                <div class="col-2">
+    </div>
+  </div>
+</div>
+{% endblock %}
+

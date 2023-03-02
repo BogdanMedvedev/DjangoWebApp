@@ -1,0 +1,78 @@
+{% extends 'news/base.html' %}
+
+{% load static %}
+
+{% block style %}
+<!--Подгружаем стили для страницы с новостями-->
+<link rel="stylesheet" href="{% static 'news/css/projects.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h2 class="had"><strong class="text">Мои проекты</strong></h2>
+  <div class="row align-items-start dark">
+          <div class="col-2">
+    </div>
+            <div class="col-8">
+      <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Веб-приложение «Блог Богдана»
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <p>Это веб-приложение с тематикой блога, написанное с помощью фреймворков Django и Bootstrap. В приложении реализованы авторизация и регистрация, поиск по сайту, кэширование на уровне файловой системы, а также подключена база данных PostgreSQL для отображения категорий новостей.</p>
+                <a target="_blank" href="{% url 'home' %}"><p><strong>Перейти в приложение </strong><img class="GitHub"
+                                src="{% static 'news/images/apple-touch-icon.png'%}" alt="Logo"></p>
+                <a target="_blank" href=https://github.com/BogdanMedvedev?tab=repositories><p><strong>Посмотреть код проекта </strong><img class="GitHub"
+                                src="{% static 'news/images/GitHub.png'%}" alt="GitHub"></p>
+                            </a>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Telegram-бот «Cafe Shop»
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <p>Это telegram-бот с тематикой ресторана, написанный с помощью асинхронного фреймворка Aiogram. К проекту подключена база данных SQLite. Бот может выполнять различные команды, например, показывать меню, добавлять товары в корзину, оформлять заказы и так далее.</p>
+                             <a target="_blank" href=https://t.me/ThisCafeShopBot><p><strong>Посмотреть бота </strong><img class="GitHub"
+                                src="{% static 'news/images/telegram.png'%}" alt="Telegram"></p>
+                            </a>
+        <a target="_blank" href=https://github.com/BogdanMedvedev?tab=repositories><p><strong>Посмотреть код проекта </strong><img class="GitHub"
+                                src="{% static 'news/images/GitHub.png'%}" alt="GitHub"></p>
+                            </a>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Другие проекты
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <p> Мини-проекты (парсер сайта с товарами, веб-сайт с тематикой магазина без подключения базы данных) и другие примеры моего кода вы можете посмотреть на GitHub.</p>
+        <a target="_blank" href=https://github.com/BogdanMedvedev?tab=repositories><strong>Перейти в GitHub </strong><img class="GitHub"
+                                src="{% static 'news/images/GitHub.png'%}" alt="GitHub"></a>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+    </div>
+                <div class="col-2">
+    </div>
+  </div>
+{% endblock %}
+{% block footer %}
+<div class="container text-center">
+    <h6><strong class="text">© Все права защищены </strong></h6>
+</div>
+{% endblock %}

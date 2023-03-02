@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+
+body {
+    font-family: Ubuntu, serif;
+    background: linear-gradient(90deg, #0A0F3A 0%, #602D61 100%);}
+
+input[type=search]::placeholder {
+	color: rgb(114, 108, 108);
+}
+
+.navbar-nav a{
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+.navbar-nav li{
+    padding-left: 2em;
+}
+
+.collapse a:hover {
+    color: #6f6f9d;
+}
+
+.navbar-nav .nav-link.active{
+    font-weight: bold;
+}
+
+.navbar-toggler {
+    background-color: rgb(100, 109, 171);
+}
+
+.d-flex input{
+    background-color: rgb(254, 247, 243);
+    
+}
+
+.d-flex button {
+    color: #6f6f9d;
+    border-color:rgb(247, 241, 241);
+    
+}
+
+.d-flex button:hover {
+    color: rgb(255, 255, 255);
+    background-color: #5f455f;
+    border-color: rgb(253, 253, 253);
+    
+}
+
+.dropdown-menu.show{
+    display: inline-block;
+}
+
+
+a{
+    text-decoration: none;
+    color: aliceblue;
+    outline: none;
+}
+
+

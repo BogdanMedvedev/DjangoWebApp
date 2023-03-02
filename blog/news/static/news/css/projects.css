@@ -1,0 +1,54 @@
+.container {
+    margin-top: 5%;
+}
+
+
+.accordion-button {
+background-color: white;
+color: black;
+}
+
+.accordion{
+--bs-accordion-btn-focus-box-shadow: none;
+--bs-accordion-btn-active-icon: none;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #212529;
+    color: white
+}
+
+.accordion-button {
+font-size: 0.7em;
+}
+
+a {
+color: black;
+}
+
+.GitHub {
+    width: 5%;
+}
+
+.had{
+    margin-bottom: 5%;
+}
+
+
+.text{
+    margin-bottom: 10%;
+    color: white;
+    animation: animtext 1s ease 0s  reverse none;
+}
+
+@keyframes animtext {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateX(-250px);
+	}
+}

@@ -1,0 +1,49 @@
+<!--Подгружаем базовые элементы страницы-->
+{% extends 'news/base.html' %}
+
+<!--Подключаем папку static, чтобы импортировать стили css-->
+{% load static %}
+
+{% block style %}
+<!--Подгружаем стили для страницы с новостями-->
+<link rel="stylesheet" href="{% static 'news/css/news.css' %}">
+{% endblock %}
+{% block content %}
+<!--Создаём блок с новостями в центре страницы-->
+<div class="container text-center one">
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      {{name}}
+  </button>
+  <ul class="dropdown-menu">
+      {% for i in category %}
+      {% if i.name != name %}
+    <li><a class="dropdown-item" href="{% url 'category' i.slug %}">{{i.name}}</a></li>
+      {% endif %}
+      {% endfor %}
+            <li><a class="dropdown-item" href="{% url 'news' %}">Все новости</a></li>
+  </ul>
+</div>
+    </div>
+    <div class="container text-center">
+        {% for i in news %}
+        "{% cycle '<div class="row">' '' %}"
+           <div class="col-lg">
+          <a target="_blank" href="{{ i.url }}">
+          <div class="card text-bg-dark">
+            {% if i.photo %}
+            <img src="{{ i.photo.url }}" class="card-img" alt="...">
+            {% endif %}
+            <div class="card-img-overlay">
+                 <div class="row">
+              <h5 class="card-title">{{ i.title }}</h5></div>
+              <div class="row"><p class="card-text">{{ i.description|truncatewords:20 }}</p></div>
+              <div class="row"><p class="card-text" style="font-style: italic;"><small>Опубликовано {{ i.time_create|date:"d.m.Y"}}</small></p></div>
+            </div>
+          </div>
+          </a>
+        </div>
+        "{% cycle '' '</div>' %}"
+        {% endfor %}
+    </div>
+{% endblock %}

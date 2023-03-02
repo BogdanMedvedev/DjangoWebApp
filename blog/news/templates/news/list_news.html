@@ -1,0 +1,22 @@
+<!--
+    <div class="container text-center">
+        {% for i in news %}
+        "{% cycle '<div class="row">' '' %}"
+           <div class="col-lg">
+          <a target="_blank" href="{{ i.url }}">
+          <div class="card text-bg-dark">
+            {% if i.photo %}
+            <img src="{{ i.photo.url }}" class="card-img" alt="...">
+            {% endif %}
+            <div class="card-img-overlay">
+                 <div class="row">
+              <h5 class="card-title">{{ i.title }}</h5></div>
+              <div class="row"><p class="card-text">{{ i.description|truncatewords:20 }}</p></div>
+              <div class="row"><p class="card-text" style="font-style: italic;"><small>Опубликовано {{ i.time_create|date:"d.m.Y"}}</small></p></div>
+            </div>
+          </div>
+          </a>
+        </div>
+        "{% cycle '' '</div>' %}"
+        {% endfor %}
+    </div>-->

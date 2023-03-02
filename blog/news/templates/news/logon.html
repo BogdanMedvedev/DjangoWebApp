@@ -1,0 +1,81 @@
+{% extends 'news/base.html' %}
+{% load cache %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'news/css/video-lk.css' %}">
+{% endblock %}
+{% block content %}
+ <div class="bgvideo">
+     {% cache 360 video-logon %}
+      <video class="bgvideo__media" src="{% static 'news/files/logon-fon.mp4' %}" type="video/mp4" autoplay muted loop></video>
+     {% endcache %}
+      <div class="effects"></div>
+      <div class="container text-center">
+        <div class="row one">
+          <div class="col">
+            <div class="video-text">
+              <div class="container text-center">
+                  {% if request.user.is_authenticated %}
+                  <h1 style="color:#ffffff;">Вы уже выполнили вход!<h2>
+                  {% else %}
+                <div class="row">
+                  <div class="col col-lg-4">
+                  </div>
+                  <div class="col col-lg-4">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link logon {{active1}}" id="pills-home-tab" data-bs-toggle="pill"
+                          data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                          aria-selected="true">Вход</button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link logon {{active2}}" id="pills-profile-tab" data-bs-toggle="pill"
+                          data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                          aria-selected="false">Регистрация</button>
+                      </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                      <div class="tab-pane fade {{act1}}" id="pills-home" role="tabpanel"
+                        aria-labelledby="pills-home-tab" tabindex="0">
+                        <form method="post">
+                                {% csrf_token %}
+                                {% for i in formone %}
+                              <div class="form-floating mb-3">
+                                <input class="form-control"
+                                       {{ i }}
+                                <label for="{{ i.id_for_label}}">{{i.label}}</label>
+                              </div>
+                                {% endfor %}
+                                {{ formone.non_field_errors }}
+                                <button type="submit" class="btn btn-dark">Войти</button>
+                                </form>
+                        </div>
+                      <div class="tab-pane fade {{act2}}" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+                        tabindex="0">
+                              <form method="post">
+                                {% csrf_token %}
+                                {% for f in formtwo %}
+                              <div class="form-floating mb-3">
+                                <input class="form-control"
+                                       {{ f }}
+                                <label for="{{ f.id_for_label}}"> {{f.label}}</label>
+                                {{ f.errors }}
+                              </div>
+                                {% endfor %}
+                                <button type="submit" class="btn btn-dark">Зарегистрироваться</button>
+                                </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col col-lg-4">
+                  </div>
+                </div>
+                      {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+{% endblock %}
