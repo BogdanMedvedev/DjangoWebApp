@@ -19,6 +19,9 @@ from django.urls import path, include
 
 from blog import settings
 
+from django.views.static import serve as mediaserve
+from django.urls import re_path
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls'))
@@ -33,3 +36,10 @@ if settings.DEBUG:
                 ] + urlpatterns
 
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns += [
+        re_path(f'^{settings.MEDIA_URL.lstrip("/")}(?P<path>.*)$',
+            mediaserve, {'document_root': settings.MEDIA_ROOT}),
+        re_path(f'^{settings.STATIC_URL.lstrip("/")}(?P<path>.*)$',
+            mediaserve, {'document_root': settings.STATIC_ROOT}),
+    ]

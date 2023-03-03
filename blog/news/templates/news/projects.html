@@ -1,5 +1,6 @@
 {% extends 'news/base.html' %}
 
+{% load cache %}
 {% load static %}
 
 {% block style %}
@@ -7,12 +8,12 @@
 <link rel="stylesheet" href="{% static 'news/css/projects.css' %}">
 {% endblock %}
 
+{% cache 360 projects %}
 {% block content %}
 <div class="container text-center">
     <h2 class="had"><strong class="text">Мои проекты</strong></h2>
   <div class="row align-items-start dark">
-          <div class="col-2">
-    </div>
+          <div class="col-2"></div>
             <div class="col-8">
       <div class="accordion" id="accordionExample">
   <div class="accordion-item">
@@ -27,7 +28,7 @@
                 <a target="_blank" href="{% url 'home' %}"><p><strong>Перейти в приложение </strong><img class="GitHub"
                                 src="{% static 'news/images/apple-touch-icon.png'%}" alt="Logo"></p>
                 <a target="_blank" href=https://github.com/BogdanMedvedev/DjangoWebApp><p><strong>Посмотреть код проекта </strong><img class="GitHub"
-                                src="{% static 'news/images/GitHub.png'%}" alt="GitHub"></p>
+                                src="{% static 'news/images/github.png'%}" alt="GitHub"></p>
                             </a>
       </div>
     </div>
@@ -45,7 +46,7 @@
                                 src="{% static 'news/images/telegram.png'%}" alt="Telegram"></p>
                             </a>
         <a target="_blank" href=https://github.com/BogdanMedvedev/Telegram_Bot><p><strong>Посмотреть код проекта </strong><img class="GitHub"
-                                src="{% static 'news/images/GitHub.png'%}" alt="GitHub"></p>
+                                src="{% static 'news/images/github.png'%}" alt="GitHub"></p>
                             </a>
       </div>
     </div>
@@ -60,15 +61,14 @@
       <div class="accordion-body">
         <p> Мини-проекты (парсер сайта с товарами, веб-сайт с тематикой магазина без подключения базы данных) и другие примеры моего кода вы можете посмотреть на GitHub.</p>
         <a target="_blank" href=https://github.com/BogdanMedvedev?tab=repositories><strong>Перейти в GitHub </strong><img class="GitHub"
-                                src="{% static 'news/images/GitHub.png'%}" alt="GitHub"></a>
+                                src="{% static 'news/images/github.png'%}" alt="GitHub"></a>
       </div>
     </div>
   </div>
 </div>
     </div>
     </div>
-                <div class="col-2">
-    </div>
+    <div class="col-2"></div>
   </div>
 {% endblock %}
 {% block footer %}
@@ -76,3 +76,4 @@
     <h6><strong class="text">© Все права защищены </strong></h6>
 </div>
 {% endblock %}
+{% endcache %}

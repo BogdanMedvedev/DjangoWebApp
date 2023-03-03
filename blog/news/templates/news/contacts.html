@@ -1,5 +1,6 @@
 {% extends 'news/base.html' %}
 
+{% load cache %}
 {% load static %}
 
 {% block style %}
@@ -8,6 +9,7 @@
 {% endblock %}
 
 {% block content %}
+{% cache 360 contact %}
 <div class="container text-center">
             <div class="row">
                 <div class="col">
@@ -44,7 +46,7 @@
     </div>
             <div class="col-2">
       <a target="_blank" href=https://github.com/BogdanMedvedev?tab=repositories><img class="contact"
-                                src="{% static 'news/images/GitHub.png'%}" alt="GitHub"></a>
+                                src="{% static 'news/images/github.png'%}" alt="GitHub"></a>
     </div>
     <div class="col-2">
       <a target="_blank" href="https://hh.ru/resume/bf18195bff0b852dfe0039ed1f67354249465a"><img class="contact"
@@ -63,5 +65,6 @@
     </div>
   </div>
 </div>
+{% endcache %}
 {% endblock %}
 
