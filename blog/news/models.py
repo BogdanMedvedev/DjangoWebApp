@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+# База данных для отображения новостей со связью ForeignKey из базы "Категории"
 class News(models.Model):
     title = models.CharField(max_length=250, verbose_name='Заголовок')
     description = models.TextField(verbose_name='Описание')
@@ -17,11 +18,13 @@ class News(models.Model):
     def get_absolute_url(self):
         return reverse('news')
 
+    #Для корректного отображения в админ-панели
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
         ordering = ['time_create']
 
+#База данных для отображения категорий новостей
 class Category(models.Model):
     name = models.CharField(max_length=250, unique=True, db_index=True, verbose_name='Категория')
     slug = models.SlugField(max_length=250, unique=True, db_index=True, verbose_name='URL')
@@ -29,6 +32,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    # Для корректного отображения в админ-панели
     class Meta:
         verbose_name = 'Категории новостей'
         verbose_name_plural = 'Категории новостей'

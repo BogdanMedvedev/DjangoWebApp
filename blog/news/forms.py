@@ -5,15 +5,16 @@ from django.core.exceptions import ValidationError
 
 from .models import *
 
-# Создаём форму на сайте для добавления новостей в базу данных
+# Форма для добавления новостей в базу данных, используется во view AddNews
 class AddNewsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         # Задаём поле на случай, если категория не выбрана
         self.fields['category'].empty_label = 'Категория не выбрана'
 
+    # Связываем форму с моделью News и указываем, какие поля отображать на странице
     class Meta:
-        # Связываем форму с моделью News и указываем, какие поля отображать
         model = News
         fields = ['title', 'description', 'url', 'photo', 'is_published', 'category']
 
@@ -25,12 +26,15 @@ class AddNewsForm(forms.ModelForm):
             raise ValidationError ('Длина превышаем 200 символов')
         return title
 
-
+# Форма для регистрации пользователей, используется во view RegisterUser
 class RegisterUserForm(UserCreationForm):
+
+    # Связываем форму с моделью News и указываем, какие поля отображать на странице
     class Meta:
         model = User
         fields = ('username', 'password1', 'password2')
 
+# Форма для авторизации пользователей, используется во view LoginUser
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput())
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput())

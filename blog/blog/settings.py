@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
-from secret_key import key
+from .secret_key import key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+#Прописываем приложение News и debug_toolbar для отладки
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -73,7 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blog.wsgi.application'
 
-
+#База данных SQLite3
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -84,6 +85,7 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 #     }
 # }
 
+#Подключаем базу данных PostgreSQL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -133,6 +135,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIR = []
 
+#Создаём путь, в котором будут сохраняться изображения
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -147,6 +150,7 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+#Создаём кэш на уровне файловой системы
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',

@@ -1,10 +1,20 @@
+<!--На данной странице будет отображаться форма для добавления новостей.
+ Она доступна только супер-пользователям-->
+
+<!--Расширяем страницу базовым шаблоном-->
 {% extends 'news/base.html' %}
 
+<!--Подключаем статические файлы-->
 {% load static %}
+
+<!--Подключаем собственные стили для страницы-->
 {% block style %}
-<link rel="stylesheet" href="{% static 'news/css/test.css' %}">
+<link rel="stylesheet" href="{% static 'news/css/addnews.css' %}">
 {% endblock %}
+
+<!--В основном блоке отображается форма для добавления новостей-->
 {% block content %}
+<!--Проверка на суперпользователя-->
 {% if user.is_superuser %}
 <div class="container text-center">
 <form action="{% url 'addnews' %}" method="post" enctype="multipart/form-data">
@@ -17,6 +27,7 @@
 </form>
 </div>
 {% else %}
+<!--Если это не суперпользователь, что отображаем следующее сообщение-->
 <h1>Страница доступная только администраторам </h1>
 {% endif %}
 {% endblock %}

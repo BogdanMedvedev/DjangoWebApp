@@ -1,12 +1,23 @@
+<!--Это страница для выполнения авторизации и регистрации-->
+
+<!--Расширяем страницу базовым шаблоном-->
 {% extends 'news/base.html' %}
+
+<!--Подключаем кэш, чтобы закэшировать видео-фон-->
 {% load cache %}
+
+<!--Подключаем статические файлы-->
 {% load static %}
 
+<!--Подключаем стили для корректного отображения видео-фона-->
 {% block style %}
 <link rel="stylesheet" href="{% static 'news/css/video-lk.css' %}">
 {% endblock %}
+
+<!--Основной блок состоит из форм авторизации и регистрации-->
 {% block content %}
  <div class="bgvideo">
+     <!--Кэшируем видео-фон-->
      {% cache 360 video-logon %}
       <video class="bgvideo__media" src="{% static 'news/files/logon-fon.mp4' %}" type="video/mp4" autoplay muted loop></video>
      {% endcache %}
@@ -16,9 +27,11 @@
           <div class="col">
             <div class="video-text">
               <div class="container text-center">
+                  <!--Если пользователь авторизован, то отображаем соответствующее сообщение-->
                   {% if request.user.is_authenticated %}
                   <h1 style="color:#ffffff;">Вы уже выполнили вход!<h2>
                   {% else %}
+                      <!--Если пользователь не авторизован, то предлагаем авторизоваться/регистрироваться-->
                 <div class="row">
                   <div class="col col-lg-4">
                   </div>
@@ -36,6 +49,7 @@
                       </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
+                        <!--Форма для авторизации-->
                       <div class="tab-pane fade {{act1}}" id="pills-home" role="tabpanel"
                         aria-labelledby="pills-home-tab" tabindex="0">
                         <form method="post">
@@ -51,6 +65,7 @@
                                 <button type="submit" class="btn btn-dark">Войти</button>
                                 </form>
                         </div>
+                        <!--Форма для регистрации-->
                       <div class="tab-pane fade {{act2}}" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
                         tabindex="0">
                               <form method="post">

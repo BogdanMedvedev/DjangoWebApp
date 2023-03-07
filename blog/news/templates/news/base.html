@@ -1,3 +1,7 @@
+<!--Это базовая страница с верхней навигационной понелью и базовыми стилями для всего веб-приложения.
+Другие страницы будут расширяться от этой страницы-->
+
+<!--Подключаем статические файлы-->
 {% load static %}
 
 <!--Подключаем Bootstrap, иконки и оформление-->
@@ -10,12 +14,14 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'news/css/header.css' %}">
+  <!--Блок для вставки собественных стилей для страницы-->
   {% block style %}
   {% endblock %}
   <link rel="apple-touch-icon" sizes="180x180" href="{% static 'news/images/apple-touch-icon.png' %}">
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'news/images/favicon-32x32.png' %}">
   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'news/images/favicon-16x16.png' %}">
   <link rel="manifest" href="{% static 'news/images/site.webmanifest' %}">
+<!--  title передаётся в зависимости от URL-адреса-->
   <title>{{ title }}</title>
 </head>
 <!--Создаём меню на верхней панеле-->
@@ -74,27 +80,32 @@
       </div>
     </nav>
   </header>
-<!--  Здесь на каждой странице будет индиаидуальный блок-->
+<!--  Здесь на каждой странице будет индивидуальный блок-->
   <section>
     {% block content %}
     {% endblock %}
-    {% if page_obj.has_other_pages %}
+<!--    Подключаем отображение пагинации-->
+    {% if page_obj.has_other_pages %} <!--Проверяем, что на странице есть объекты для пагинации-->
     <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
-    {% if page_obj.has_previous %}
+    {% if page_obj.has_previous %} <!--Если есть страница до текущей, то добавляем стрелку влево-->
     <li class="page-item">
+      <!--Добавляем в ссылку text для страницы с результатами поиска-->
       <a class="page-link" href="?{{ text }}page={{ page_obj.previous_page_number }}">&larr;</a>
     </li>
     {% endif %}
-      {% for i in paginator.page_range %}
+      {% for i in paginator.page_range %} <!--Формируем пагинацию-->
     {% if page_obj.number == i %}
+    <!--Добавляем в ссылку text для страницы с результатами поиска-->
     <li class="page-item active"><a class="page-link active" href="?{{ text }}page={{i}}">{{i}}</a></li>
     {% elif i >= page_obj.number|add:-2 and i <= page_obj.number|add:2 %}
+    <!--Добавляем в ссылку text для страницы с результатами поиска-->
     <li class="page-item"><a class="page-link" href="?{{ text }}page={{i}}">{{i}}</a></li>
     {% endif %}
       {% endfor %}
-     {% if page_obj.has_next %}
+     {% if page_obj.has_next %} <!--Если есть страница после текущей, то добавляем стрелку вправо-->
     <li class="page-item">
+      <!--Добавляем в ссылку text для страницы с результатами поиска-->
       <a class="page-link" href="?{{ text }}page={{ page_obj.next_page_number }}">&rarr;</a>
     </li>
     {% endif %}
@@ -103,6 +114,7 @@
     {% endif %}
   </section>
   <footer>
+<!--Блок под основным контентом-->
     {% block footer %}
     {% endblock %}
   </footer>

@@ -22,12 +22,14 @@ from blog import settings
 from django.views.static import serve as mediaserve
 from django.urls import re_path
 
+# Подключаем ссылки из приложения News
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls'))
 ]
 
 
+# Подключаем debug_toolbar
 if settings.DEBUG:
     import debug_toolbar
 
@@ -36,6 +38,7 @@ if settings.DEBUG:
                 ] + urlpatterns
 
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Данная настройка необходима для работы Static-файлов на сервере Beget
 else:
     urlpatterns += [
         re_path(f'^{settings.MEDIA_URL.lstrip("/")}(?P<path>.*)$',

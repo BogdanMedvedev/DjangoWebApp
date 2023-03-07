@@ -1,28 +1,35 @@
-<!--Подгружаем базовые элементы страницы-->
+<!--Это страница для отображения новостей по категориям. Связана с моделями News и Category-->
+
+<!--Расширяем страницу базовым шаблоном-->
 {% extends 'news/base.html' %}
 
-<!--Подключаем папку static, чтобы импортировать стили css-->
+<!--Подключаем статические файлы-->
 {% load static %}
 
+<!--Подключаем стили для страницы-->
 {% block style %}
-<!--Подгружаем стили для страницы с новостями-->
 <link rel="stylesheet" href="{% static 'news/css/news.css' %}">
 {% endblock %}
+
+<!--В основном блоке отображаются новости (по 6 на странице, по 2 в одной строке) по категориям-->
 {% block content %}
-<!--Создаём блок с новостями в центре страницы-->
 <div class="container text-center one">
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     Все новости
   </button>
+    <!--Создаем возможность выбрать другую категорию-->
   <ul class="dropdown-menu">
+      <!--Отображаем список из всех имеющихся категорий-->
       {% for i in category %}
     <li><a class="dropdown-item" href="{% url 'category' i.slug %}">{{i.name}}</a></li>
       {% endfor %}
   </ul>
 </div>
     </div>
+<!--Отображаем все новости всех категорий-->
     <div class="container text-center">
+        <!--Пробегаемся по списку из всех новостей и отображаем каждую новость-->
         {% for i in allnews %}
         "{% cycle '<div class="row">' '' %}"
            <div class="col-lg">
@@ -40,6 +47,7 @@
           </div>
           </a>
         </div>
+        <!--Создаём цикл внутри for, чтобы в одной строке было по две новости-->
         "{% cycle '' '</div>' %}"
         {% endfor %}
     </div>
