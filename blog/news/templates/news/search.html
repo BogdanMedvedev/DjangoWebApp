@@ -24,7 +24,7 @@
   <!--Пробегаемся по списку с найденными новостями и отображаем их в виде строки-->
 {% for i in allnews %}
 <div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action">
+  <a target="_blank" href="{{ i.url }}" class="list-group-item list-group-item-action">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">{{ i.title }}</h5>
       <small class="text-muted">{{ i.time_create }}</small>
