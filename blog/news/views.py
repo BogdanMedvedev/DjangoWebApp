@@ -5,9 +5,17 @@ from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, TemplateView
+from rest_framework import generics, viewsets, mixins
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet
 
 from news.forms import *
 from news.models import News
+from news.permissions import IsAdminOrReadOnly, IsUserOrReadOnly
+from news.serializers import NewsSerializer
 from news.utils import *
 
 
@@ -174,3 +182,48 @@ def logout_user(request):
     logout(request)
     return redirect('logon')
 
+# API для вывода первых 5 новостей и добавления новости
+class NewsAPIView(generics.ListCreateAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+    # Вносить записи могут только авторизованные
+    # permission_classes = (IsAuthenticatedOrReadOnly, )
+
+    # Создавать записи могут только авторизованные по токену
+    authentication_classes = (TokenAuthentication, )
+
+# API обновления конкретной записи
+class NewsAPIUpdate(generics.RetrieveUpdateAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+    # Обновлять запись могут только создатели записи или администратор
+    permission_classes = (IsUserOrReadOnly,)
+
+class NewsAPIDestroyView(generics.RetrieveDestroyAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+    # УДалить запись может только администратор
+    permission_classes = (IsAdminOrReadOnly,)
+
+#
+# class NewsViewSet(viewsets.ModelViewSet):
+#     #queryset = News.objects.all()
+#     serializer_class = NewsSerializer
+#
+#
+#     def get_queryset(self):
+#         pk = self.kwargs.get('pk')
+#
+#         if not pk:
+#             return News.objects.all()[:3]
+#         return News.objects.filter(pk=pk)
+#
+#     @action(methods=['get'], detail=True)
+#     def category(self, request, pk=None):
+#         cats = Category.objects.get(pk=pk)
+#         return Response({'category': cats.name})
+#
+#     permission_classes = (IsAuthenticatedOrReadOnly, )

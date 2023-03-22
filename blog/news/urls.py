@@ -1,6 +1,12 @@
-from django.urls import path
+from django.urls import path, include, re_path
+from rest_framework import routers
 
 from news.views import *
+
+# Попытка создат роутер
+# router = routers.SimpleRouter()
+# router.register(r'news', NewsViewSet, basename='news')
+# print(router.urls)
 
 # Создаём ссылки и зависимости для приложения News
 urlpatterns = [
@@ -21,4 +27,16 @@ urlpatterns = [
     # Страница для добавления новостей (только для администратора)
     path('addnews/', AddNews.as_view(), name='addnews'),
     # Страница с результатами поиска
-    path('search/', SearchPage.as_view(), name='search')]
+    path('search/', SearchPage.as_view(), name='search'),
+    # API для аутентификации пользователя через токе
+    path('api/v1/auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
+    # API для аутентификации пользователя на сайте через cookies
+    path('api/v1/authsesseion/', include('rest_framework.urls')),
+    # API для получения списка новостей и добавления новости
+    path('api/v1/news/', NewsAPIView.as_view()),
+    # API для просмотра/обновления какой-либо новости
+    path('api/v1/news/<int:pk>/', NewsAPIUpdate.as_view()),
+    # API для просмотра/удаления новости
+    path('api/v1/newsdelete/<int:pk>/', NewsAPIDestroyView.as_view())
+]
